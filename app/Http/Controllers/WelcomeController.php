@@ -2,32 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\GuardianApi;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Log;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    use GuardianApi;
+    
+    /**
+     * Returns the home page and handles the searching of news.
+     */
+    public function index(Request $request)
     {
-        try {
-            $client = new Client();
-            $apiRequest = $client->request('GET', env('GUARDIAN_SEARCH_URL').'api-key='.env('GUARDIAN_NEWS_API_KEY'));
-            $news = json_decode($apiRequest->getBody()->getContents(), true)['response']['results'];
-            // return json_decode($apiRequest->getBody()->getContents(), true);
-        } catch (RequestException $e) {
-            //For handling exception
-            Log::error($e->getRequest());
-            if ($e->hasResponse()) {
-                Log::error($e->getResponse());
-            }
-        }
-        // $news=$apiRequest->getBody()->getContents();
+        $searchString = isset($request->search)?$request->search:"";
+        $news=$this->searchResultsOnGuardian($searchString);
         $data = array(
             'news'=>$news
         );
-        Log::debug($news);
         return view("welcome")->with($data);
     }
 }
