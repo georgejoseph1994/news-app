@@ -1,41 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>News-App George</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <style>
-        </style>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-        <style>
-            body {
-                font-family: 'Nunito';
-            }
-        </style>
-    </head>
-    <body class="antialiased" >
-        <div id="app" class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block bg-white text-right pr-5">
-                        @auth
-                            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                            @endif
-                        @endauth
-                </div>
-            @endif
-            <div class="container mt-5">
-                <form action="{{ route('welcome') }}" method="GET">
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="container mt-5">
+                <form action="{{ route('home') }}" method="GET">
                     <div class="input-group mb-4">
                         <input name="search" required type="text" class="form-control" placeholder="Search for news">
                         <div class="input-group-append">
@@ -82,8 +53,8 @@
                     </div>
                 @endforeach
             </div>
+            </div>
         </div>
-        </div>
-        </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Many to many relationship with news
+     */
+    public function news()
+    {
+        return $this->belongsToMany(News::class);
+    }
 }
