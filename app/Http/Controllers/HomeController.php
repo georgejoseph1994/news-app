@@ -47,7 +47,6 @@ class HomeController extends Controller
     */
     public function pin(Request $request)
     {
-        Log::debug($request);
         $news_article = News::find($request->id);
         // if the article is not yet persisted
         if (!$news_article) {
