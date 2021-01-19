@@ -11,7 +11,7 @@ trait GuardianApi
     /**
      * Returns the results of search from Guardians API.
      *
-     * @param String $searchString - Eg "politcs"
+     * @param String $searchString - Eg "politics"
      *
      * @return mixed $news
      */

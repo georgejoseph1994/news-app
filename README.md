@@ -57,6 +57,12 @@
     ./vendor/bin/sail npm run dev
     ```
 
+## Running test
+
+    ```
+    ./vendor/bin/sail test
+    ```
+
 ## To do
 
 -   [x] Create laravel skeleton with sail.
